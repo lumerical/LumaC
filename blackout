@@ -1,0 +1,162 @@
+local plr = game.Players.LocalPlayer
+local rs = game:GetService("RunService")
+function walkspeedbypass()
+    local speed = _G.ws
+    _G.bypasson = true
+    rs:BindToRenderStep("中华人民共和国国家安全部", 2000, function() 
+    pcall(function() 
+        plr.Character.HumanoidRootPart.CFrame = plr.Character.HumanoidRootPart.CFrame + (plr.Character.Humanoid.MoveDirection * speed/50) 
+    end)
+end)
+end
+
+
+--setup functions
+
+function infsprint()
+    local oldNamecall
+    oldNamecall = hookmetamethod(game, "__namecall", function(...)
+    local method = getnamecallmethod()
+    local args = {...}
+    if method == "FireServer" and tostring(args[1]) == "Sprint" then
+        args[2] = false
+    end
+    return oldNamecall(unpack(args))
+    end)
+end
+function ragdoll()
+local args = {
+            [1] = 2,
+            [2] = "Stairs",
+            [3] = true
+        }
+    game:GetService("ReplicatedStorage").Events.Player.Ragdoll:FireServer(unpack(args))
+end
+
+function errornotify(titlez,message)
+    game.StarterGui:SetCore("SendNotification", {
+    Title = titlez; -- the title (ofc)
+    Text = message; -- what the text says (ofc)
+    Duration = 4; -- how long the notification should in secounds
+    })
+end
+
+--setup lib and functions
+
+local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
+local Window = Library.CreateLib("LUMA CLIENT V1.1", "Ocean")
+local TPTab = Window:NewTab("Locations")
+local CHARTab = Window:NewTab("Character")
+local Locations = TPTab:NewSection("3 line tp bypass, nice anticheat")
+local Character_Stuff = CHARTab:NewSection("tell the irs i can outrun their best men")
+local CharOptions = Character_Stuff:NewDropdown("character cheats", "wow guys jjsploit speedhack button!!!", {'Infinite Sprint'}, function(currentOption)
+    if currentOption == 'Infinite Sprint' then
+     infsprint()   
+    end
+end)
+local SpeedSlider = Character_Stuff:NewSlider("Walkspeed", "vroom", 69, 16, function(s)
+    if s > 16 then
+        rs:UnbindFromRenderStep("中华人民共和国国家安全部")
+        _G.ws = s
+        walkspeedbypass()
+    elseif s == 16 then
+        rs:UnbindFromRenderStep("中华人民共和国国家安全部")
+    end
+end)
+Locations:NewDropdown("Locations", "teleport to cool locations", {"Inside Bunker", "Inside Bravo Crate (Hidden)", "Taller tower","Weaponry Tower 1","Weaponry Tower 2","Behind Bravo Crate",'Library Roof','Warehouse','Bunker Vents','Crane','Factory','Dealer','Airdrop'}, function(currentOption)
+    local arg = currentOption
+    if arg == "Inside Bunker" then
+        local LocalPlayer = game:GetService("Players").LocalPlayer
+        local Character = LocalPlayer.Character
+        local Root = Character:FindFirstChild("HumanoidRootPart")
+        ragdoll()
+        Root.CFrame = CFrame.new(512.863,5.84999,-99.740)
+    elseif arg == "Inside Bravo Crate (Hidden)" then
+        local LocalPlayer = game:GetService("Players").LocalPlayer
+        local Character = LocalPlayer.Character
+        local Root = Character:FindFirstChild("HumanoidRootPart")
+        ragdoll()
+        Root.CFrame = CFrame.new(466.7,6.745,-185.69)
+    elseif arg == "Weaponry Tower 2" then
+        local LocalPlayer = game:GetService("Players").LocalPlayer
+        local Character = LocalPlayer.Character
+        local Root = Character:FindFirstChild("HumanoidRootPart")
+        ragdoll()
+        Root.CFrame = CFrame.new(-64.2,45.745,-34.44)
+    elseif arg == "Crane" then
+        local LocalPlayer = game:GetService("Players").LocalPlayer
+        local Character = LocalPlayer.Character
+        local Root = Character:FindFirstChild("HumanoidRootPart")
+        ragdoll()
+        Root.CFrame = CFrame.new(136.32,224.154,269.03)
+    elseif arg == "Bunker Vents" then
+        local LocalPlayer = game:GetService("Players").LocalPlayer
+        local Character = LocalPlayer.Character
+        local Root = Character:FindFirstChild("HumanoidRootPart")
+        ragdoll()
+        Root.CFrame = CFrame.new(620.67,-12.65,-110.1)
+    elseif arg == "Weaponry Tower 1" then
+        local LocalPlayer = game:GetService("Players").LocalPlayer
+        local Character = LocalPlayer.Character
+        local Root = Character:FindFirstChild("HumanoidRootPart")
+        ragdoll()
+        Root.CFrame = CFrame.new(-7.17,52.3,-32.5)
+    elseif arg == "Library Roof" then
+        local LocalPlayer = game:GetService("Players").LocalPlayer
+        local Character = LocalPlayer.Character
+        local Root = Character:FindFirstChild("HumanoidRootPart")
+        ragdoll()
+        Root.CFrame = CFrame.new(420.082,29.12,245)
+    elseif arg == "Behind Bravo Crate" then
+        local LocalPlayer = game:GetService("Players").LocalPlayer
+        local Character = LocalPlayer.Character
+        local Root = Character:FindFirstChild("HumanoidRootPart")
+        ragdoll()
+        Root.CFrame = CFrame.new(469.915,5.87,-199.526)
+    elseif arg == "Taller tower" then
+        local LocalPlayer = game:GetService("Players").LocalPlayer
+        local Character = LocalPlayer.Character
+        local Root = Character:FindFirstChild("HumanoidRootPart")
+        ragdoll()
+        Root.CFrame = CFrame.new(241,179,375)
+    elseif arg == "Warehouse" then
+        local LocalPlayer = game:GetService("Players").LocalPlayer
+        local Character = LocalPlayer.Character
+        local Root = Character:FindFirstChild("HumanoidRootPart")
+        ragdoll()
+        Root.CFrame = CFrame.new(283.23,30.62,-50.14)
+    elseif arg == "Inside Bravo Crate (Hidden)" then
+        local LocalPlayer = game:GetService("Players").LocalPlayer
+        local Character = LocalPlayer.Character
+        local Root = Character:FindFirstChild("HumanoidRootPart")
+        ragdoll()
+        Root.CFrame = CFrame.new(466.7,6.745,-185.69)
+    elseif arg == "Factory" then
+        local LocalPlayer = game:GetService("Players").LocalPlayer
+        local Character = LocalPlayer.Character
+        local Root = Character:FindFirstChild("HumanoidRootPart")
+        ragdoll()
+        Root.CFrame = CFrame.new(-114.86, 19.37, 49.42)
+    elseif arg == "Dealer" then
+        local LocalPlayer = game:GetService("Players").LocalPlayer
+        local Character = LocalPlayer.Character
+        local Root = Character:FindFirstChild("HumanoidRootPart")
+        ragdoll()
+        Root.CFrame = CFrame.new(-351.539, 3.37, -398.917)
+    elseif arg == "Airdrop" then
+        if workspace.Airdrops.AirdropSupply.RootPart then
+        airdrop_part_cframe = workspace.Airdrops.AirdropSupply.RootPart.CFrame
+        else
+        errornotify('you stupid','there is no airdrops')
+        end
+        local LocalPlayer = game:GetService("Players").LocalPlayer
+        local Character = LocalPlayer.Character
+        local Torso = LocalPlayer.Character.Torso
+        local Root = Character:FindFirstChild("HumanoidRootPart")
+        ragdoll()
+        Root.CFrame = airdrop_part_cframe
+        Torso.Anchored = true
+        wait(3)
+        Torso.Anchored = false
+    end
+end)
