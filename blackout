@@ -13,6 +13,7 @@ end
 
 --setup functions
 
+
 function infsprint()
     local oldNamecall
     oldNamecall = hookmetamethod(game, "__namecall", function(...)
@@ -44,15 +45,27 @@ end
 --setup lib and functions
 
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
-local Window = Library.CreateLib("LUMA CLIENT V1.1", "Ocean")
+local Window = Library.CreateLib("LUMA CLIENT 1.2", "Ocean")
 local TPTab = Window:NewTab("Locations")
 local CHARTab = Window:NewTab("Character")
 local Locations = TPTab:NewSection("3 line tp bypass, nice anticheat")
 local Character_Stuff = CHARTab:NewSection("tell the irs i can outrun their best men")
-local CharOptions = Character_Stuff:NewDropdown("character cheats", "wow guys jjsploit speedhack button!!!", {'Infinite Sprint'}, function(currentOption)
+local CharOptions = Character_Stuff:NewDropdown("character cheats", "wow guys jjsploit speedhack button!!!", {'Infinite Sprint','Instant Pickup'}, function(currentOption)
     if currentOption == 'Infinite Sprint' then
-     infsprint()   
+     infsprint()
+    elseif currentOption == 'Instant Pickup' then
+    local function check(v)
+    if v:IsA("ProximityPrompt") then
+        v.HoldDuration = 0
     end
+    end
+    for k,v in pairs(game:GetDescendants()) do
+    pcall(check,v) 
+    end
+    game.DescendantAdded:Connect(function(child)
+    pcall(check,child) 
+end)
+end
 end)
 local SpeedSlider = Character_Stuff:NewSlider("Walkspeed", "vroom", 69, 16, function(s)
     if s > 16 then
@@ -63,7 +76,7 @@ local SpeedSlider = Character_Stuff:NewSlider("Walkspeed", "vroom", 69, 16, func
         rs:UnbindFromRenderStep("中华人民共和国国家安全部")
     end
 end)
-Locations:NewDropdown("Locations", "teleport to cool locations", {"Inside Bunker", "Inside Bravo Crate (Hidden)", "Taller tower","Weaponry Tower 1","Weaponry Tower 2","Behind Bravo Crate",'Library Roof','Warehouse','Bunker Vents','Crane','Factory','Dealer','Airdrop'}, function(currentOption)
+Locations:NewDropdown("Locations", "teleport to cool locations", {"Inside Bunker", "Inside Bravo Crate (Hidden)", "Taller tower","Weaponry Tower 1","Weaponry Tower 2","Behind Bravo Crate",'Library Roof','Warehouse','Bunker Vents','Crane','Airdrop','Factory','Dealer'}, function(currentOption)
     local arg = currentOption
     if arg == "Inside Bunker" then
         local LocalPlayer = game:GetService("Players").LocalPlayer
@@ -125,12 +138,6 @@ Locations:NewDropdown("Locations", "teleport to cool locations", {"Inside Bunker
         local Root = Character:FindFirstChild("HumanoidRootPart")
         ragdoll()
         Root.CFrame = CFrame.new(283.23,30.62,-50.14)
-    elseif arg == "Inside Bravo Crate (Hidden)" then
-        local LocalPlayer = game:GetService("Players").LocalPlayer
-        local Character = LocalPlayer.Character
-        local Root = Character:FindFirstChild("HumanoidRootPart")
-        ragdoll()
-        Root.CFrame = CFrame.new(466.7,6.745,-185.69)
     elseif arg == "Factory" then
         local LocalPlayer = game:GetService("Players").LocalPlayer
         local Character = LocalPlayer.Character
@@ -142,7 +149,6 @@ Locations:NewDropdown("Locations", "teleport to cool locations", {"Inside Bunker
         local Character = LocalPlayer.Character
         local Root = Character:FindFirstChild("HumanoidRootPart")
         ragdoll()
-        Root.CFrame = CFrame.new(-351.539, 3.37, -398.917)
     elseif arg == "Airdrop" then
         if workspace.Airdrops.AirdropSupply.RootPart then
         airdrop_part_cframe = workspace.Airdrops.AirdropSupply.RootPart.CFrame
